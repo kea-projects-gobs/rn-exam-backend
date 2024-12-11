@@ -1,5 +1,6 @@
 package dk.kea.rnexambackend.entities;
 
+import dk.kea.rnexambackend.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class MealPlan {
     private Long id;
 
     @ManyToOne
-    private User user;
+    private UserWithRoles user;
 
     @ManyToOne
     private Recipe recipe;
