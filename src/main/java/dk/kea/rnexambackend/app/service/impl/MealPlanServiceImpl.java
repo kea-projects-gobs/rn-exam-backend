@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,25 +43,23 @@ public class MealPlanServiceImpl implements MealPlanService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
 
         // Check if user already has a meal planned for this day
-        mealPlanRepository.findByUserAndDayOfWeek(user, mealPlanDTO.getDayOfWeek())
-                .ifPresent(existingPlan -> {
-                    // If there's already a plan for this day, just update it instead of deleting
-                    existingPlan.setRecipe(recipe);
-                    mealPlanRepository.save(existingPlan);
-                });
+        Optional<MealPlan> existingPlan = mealPlanRepository.findByUserAndDayOfWeek(user, mealPlanDTO.getDayOfWeek());
 
-        // If no existing plan was found, create a new one
-        MealPlan mealPlan = new MealPlan();
-        mealPlan.setUser(user);
-        mealPlan.setRecipe(recipe);
-        mealPlan.setDayOfWeek(mealPlanDTO.getDayOfWeek());
+        MealPlan mealPlan;
+        if (existingPlan.isPresent()) {
+            // Update existing plan
+            mealPlan = existingPlan.get();
+            mealPlan.setRecipe(recipe);
+        } else {
+            // Create new plan
+            mealPlan = new MealPlan();
+            mealPlan.setUser(user);
+            mealPlan.setRecipe(recipe);
+            mealPlan.setDayOfWeek(mealPlanDTO.getDayOfWeek());
+        }
 
         MealPlan saved = mealPlanRepository.save(mealPlan);
-
-        // Include recipe name in the response
-        MealPlanDTO response = convertToDTO(saved);
-        response.setRecipeName(recipe.getName());
-        return response;
+        return convertToDTO(saved);
     }
 
     @Override
