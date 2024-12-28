@@ -96,7 +96,7 @@ public class SetupData implements ApplicationRunner {
         asiatiskBlomkålIngredients.put(306880L, 1); // Ingefær
         asiatiskBlomkålIngredients.put(90248L, 1); // Sesamfrø
         asiatiskBlomkålIngredients.put(90909L, 1); // Karry Pulver
-        asiatiskBlomkålIngredients.put(101167, 1); // Sød Chilisauce
+        asiatiskBlomkålIngredients.put(101167L, 1); // Sød Chilisauce
         asiatiskBlomkålIngredients.put(25751L, 1); // Smør
 
         asiatiskBlomkål.setIngredients(asiatiskBlomkålIngredients);
