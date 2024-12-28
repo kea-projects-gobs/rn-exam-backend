@@ -1,4 +1,4 @@
-package dk.kea.rnexambackend.entities;
+package dk.kea.rnexambackend.app.entity;
 
 import dk.kea.rnexambackend.security.entity.UserWithRoles;
 import jakarta.persistence.*;

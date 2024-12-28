@@ -1,6 +1,6 @@
 package dk.kea.rnexambackend.security.entity;
 
-import dk.kea.rnexambackend.entities.MealPlan;
+import dk.kea.rnexambackend.app.entity.MealPlan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
