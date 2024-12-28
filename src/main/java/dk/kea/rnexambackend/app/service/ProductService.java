@@ -5,6 +5,6 @@ import dk.kea.rnexambackend.app.entity.Product;
 
 public interface ProductService {
     ProductDTO getProductById(Long id);
-    ProductDTO convertToDTO(Product product);
-    Product convertToEntity(ProductDTO productDTO);
+    ProductDTO convertProductToDTO(Product product);
+    Product convertProductToEntity(ProductDTO productDTO);
 }

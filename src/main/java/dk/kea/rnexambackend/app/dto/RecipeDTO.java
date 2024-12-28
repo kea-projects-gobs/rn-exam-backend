@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,5 +17,5 @@ public class RecipeDTO {
     private String description;
     private Integer preparationTime;
     private Integer servings;
-    private ProductDTO products;
+    private List<ProductDTO> products;
 }
