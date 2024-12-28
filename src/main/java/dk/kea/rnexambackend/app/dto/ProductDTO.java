@@ -1,20 +1,16 @@
-package dk.kea.rnexambackend.entities;
+package dk.kea.rnexambackend.app.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
-    @Id
-    private Long remaId;
+public class ProductDTO {
+    private Long id;
     private String name;
     private Double price;
 }

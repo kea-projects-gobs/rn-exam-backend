@@ -1,27 +1,27 @@
-package dk.kea.rnexambackend.entities;
+package dk.kea.rnexambackend.app.entity;
 
-import dk.kea.rnexambackend.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealPlan {
+public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
+    private String description;
+    private Integer preparationTime;
+    private Integer servings;
 
-    @ManyToOne
-    private UserWithRoles user;
-
-    @ManyToOne
-    private Recipe recipe;
-
-    private String dayOfWeek;
+    @ManyToMany
+    private List<Product> products;
 }

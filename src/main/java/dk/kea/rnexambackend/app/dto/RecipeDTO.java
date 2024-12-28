@@ -1,27 +1,19 @@
-package dk.kea.rnexambackend.entities;
+package dk.kea.rnexambackend.app.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RecipeDTO {
     private Long id;
     private String name;
     private String description;
     private Integer preparationTime;
     private Integer servings;
-
-    @ManyToMany
-    private List<Product> products;
+    private ProductDTO products;
 }
