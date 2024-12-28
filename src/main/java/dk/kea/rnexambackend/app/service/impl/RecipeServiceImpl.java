@@ -1,11 +1,8 @@
 package dk.kea.rnexambackend.app.service.impl;
 
-import dk.kea.rnexambackend.app.dto.ProductDTO;
 import dk.kea.rnexambackend.app.dto.RecipeDTO;
-import dk.kea.rnexambackend.app.entity.Product;
 import dk.kea.rnexambackend.app.entity.Recipe;
 import dk.kea.rnexambackend.app.repository.RecipeRepository;
-import dk.kea.rnexambackend.app.service.ProductService;
 import dk.kea.rnexambackend.app.service.RecipeService;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +12,9 @@ import java.util.Optional;
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
-    private final ProductService productService;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, ProductService productService) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
-        this.productService = productService;
     }
 
     @Override
@@ -44,12 +39,7 @@ public class RecipeServiceImpl implements RecipeService {
         dto.setDescription(recipe.getDescription());
         dto.setPreparationTime(recipe.getPreparationTime());
         dto.setServings(recipe.getServings());
-
-        // Convert product to productDTO
-        List<ProductDTO> productDTOs = recipe.getProducts().stream()
-                .map(productService::convertProductToDTO)
-                .toList();
-        dto.setProducts(productDTOs);
+        dto.setIngredients(recipe.getProducts());
         return dto;
     }
 
@@ -61,12 +51,7 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setDescription(recipeDTO.getDescription());
         recipe.setPreparationTime(recipeDTO.getPreparationTime());
         recipe.setServings(recipeDTO.getServings());
-
-        // Convert to product entity
-        List<Product> products = recipeDTO.getProducts().stream()
-                .map(productService::convertProductToEntity)
-                .toList();
-        recipe.setProducts(products);
+        recipe.setProducts(recipeDTO.getIngredients());
         return recipe;
     }
 }

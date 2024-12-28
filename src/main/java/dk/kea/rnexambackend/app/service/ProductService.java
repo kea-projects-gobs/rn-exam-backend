@@ -1,10 +1,9 @@
 package dk.kea.rnexambackend.app.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import dk.kea.rnexambackend.app.dto.ProductDTO;
-import dk.kea.rnexambackend.app.entity.Product;
 
 public interface ProductService {
     ProductDTO getProductById(Long id);
-    ProductDTO convertProductToDTO(Product product);
-    Product convertProductToEntity(ProductDTO productDTO);
+    ProductDTO convertProductToDTO(JsonNode product);
 }

@@ -1,44 +1,42 @@
 package dk.kea.rnexambackend.app.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import dk.kea.rnexambackend.app.dto.ProductDTO;
-import dk.kea.rnexambackend.app.entity.Product;
-import dk.kea.rnexambackend.app.repository.ProductRepository;
 import dk.kea.rnexambackend.app.service.ProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private final RestTemplate restTemplate;
+    private final String REMA_API_URL = "https://cphapp.rema1000.dk/api/v3/products";
 
-    private final ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl() {
+        this.restTemplate = new RestTemplate();
     }
 
     @Override
-    public ProductDTO getProductById(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        return product.map(this::convertProductToDTO)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-    }
+    public ProductDTO getProductById(Long remaId) {
+        String url = REMA_API_URL + "/" + remaId;
+        JsonNode response = restTemplate.getForObject(url, JsonNode.class);
 
+        if (response.has("data")) {
+            return convertProductToDTO(response.get("data"));
+        }
+        throw new RuntimeException("Product not found");
+    }
     @Override
-    public ProductDTO convertProductToDTO(Product product) {
+    public ProductDTO convertProductToDTO(JsonNode product) {
         ProductDTO dto = new ProductDTO();
-        dto.setId(product.getRemaId());
-        dto.setName(product.getName());
-        dto.setPrice(product.getPrice());
-        return dto;
-    }
+        dto.setId(product.get("id").asLong());
+        dto.setName(product.get("name").asText());
 
-    @Override
-    public Product convertProductToEntity(ProductDTO productDTO) {
-        Product product = new Product();
-        product.setRemaId(productDTO.getId());
-        product.setName(productDTO.getName());
-        product.setPrice(productDTO.getPrice());
-        return product;
+        // Get the current price from the rema price array
+        JsonNode price = product.get("prices");
+        if (price.isArray() && !price.isEmpty()) {
+            dto.setPrice(price.get(0).get("price").asDouble());
+        }
+        return dto;
     }
 }

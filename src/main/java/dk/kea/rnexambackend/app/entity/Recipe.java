@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -22,6 +23,6 @@ public class Recipe {
     private Integer preparationTime;
     private Integer servings;
 
-    @ManyToMany
-    private List<Product> products;
+    @ElementCollection
+    private Map<Long, Integer> products; // <rema ProductID, Quantity>
 }
