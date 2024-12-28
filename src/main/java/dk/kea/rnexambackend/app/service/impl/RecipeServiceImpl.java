@@ -39,7 +39,7 @@ public class RecipeServiceImpl implements RecipeService {
         dto.setDescription(recipe.getDescription());
         dto.setPreparationTime(recipe.getPreparationTime());
         dto.setServings(recipe.getServings());
-        dto.setIngredients(recipe.getProducts());
+        dto.setIngredients(recipe.getIngredients());
         return dto;
     }
 
@@ -51,7 +51,7 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setDescription(recipeDTO.getDescription());
         recipe.setPreparationTime(recipeDTO.getPreparationTime());
         recipe.setServings(recipeDTO.getServings());
-        recipe.setProducts(recipeDTO.getIngredients());
+        recipe.setIngredients(recipeDTO.getIngredients());
         return recipe;
     }
 }

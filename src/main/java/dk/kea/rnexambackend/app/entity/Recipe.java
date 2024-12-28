@@ -23,5 +23,5 @@ public class Recipe {
     private Integer servings;
 
     @ElementCollection
-    private Map<Long, Integer> products; // <rema ProductID, Quantity>
+    private Map<Long, Integer> ingredients; // <rema ProductID, Quantity>
 }
