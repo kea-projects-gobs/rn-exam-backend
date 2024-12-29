@@ -341,7 +341,7 @@ public class SetupData implements ApplicationRunner {
 
         Map<Long, Integer> farvedeBederMedTeriyakiIngredients = new HashMap<>();
         farvedeBederMedTeriyakiIngredients.put(306646L, 1); // Farvede Beder
-        farvedeBederMedTeriyakiIngredients.put(110155L, 1); // Olie
+        farvedeBederMedTeriyakiIngredients.put(118421L, 1); // Olie
         farvedeBederMedTeriyakiIngredients.put(101574L, 1); // Teriyaki Glaze
 
         farvedeBederMedTeriyaki.setIngredients(farvedeBederMedTeriyakiIngredients);
@@ -409,7 +409,7 @@ public class SetupData implements ApplicationRunner {
         Map<Long, Integer> bagtBlomkålIBBQSauceIngredients = new HashMap<>();
         bagtBlomkålIBBQSauceIngredients.put(306254L, 1); // Blomkål
         bagtBlomkålIBBQSauceIngredients.put(110238L, 1); // BBQ Sauce
-        bagtBlomkålIBBQSauceIngredients.put(110155L, 1); // Olie
+        bagtBlomkålIBBQSauceIngredients.put(118421L, 1); // Olie
 
         bagtBlomkålIBBQSauce.setIngredients(bagtBlomkålIBBQSauceIngredients);
 
