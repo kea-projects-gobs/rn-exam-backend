@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -21,7 +22,14 @@ public class Recipe {
     private String description;
     private Integer preparationTime;
     private Integer servings;
+    private String imageUrl;
+
+    @ElementCollection
+    @CollectionTable(name = "recipe_instructions")
+    private List<String> instructions;
+
 
     @ElementCollection
     private Map<Long, Integer> ingredients; // <rema ProductID, Quantity>
+
 }
