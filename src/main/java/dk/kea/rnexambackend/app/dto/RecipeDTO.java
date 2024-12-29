@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -17,5 +18,7 @@ public class RecipeDTO {
     private String description;
     private Integer preparationTime;
     private Integer servings;
-    private Map<Long, Integer> ingredients; // <rema ProductID, Quantity>
+    private String imageUrl;
+    private List<String> instructions;
+    private Map<Long, Integer> ingredients; // <rema ProductID, Quantity// >
 }

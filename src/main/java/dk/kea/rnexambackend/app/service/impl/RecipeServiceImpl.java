@@ -7,7 +7,9 @@ import dk.kea.rnexambackend.app.service.RecipeService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -39,7 +41,10 @@ public class RecipeServiceImpl implements RecipeService {
         dto.setDescription(recipe.getDescription());
         dto.setPreparationTime(recipe.getPreparationTime());
         dto.setServings(recipe.getServings());
+        dto.setImageUrl(recipe.getImageUrl());
+        dto.setInstructions(recipe.getInstructions());
         dto.setIngredients(recipe.getIngredients());
+
         return dto;
     }
 
@@ -51,7 +56,10 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setDescription(recipeDTO.getDescription());
         recipe.setPreparationTime(recipeDTO.getPreparationTime());
         recipe.setServings(recipeDTO.getServings());
+        recipe.setImageUrl(recipeDTO.getImageUrl());
+        recipe.setInstructions(recipeDTO.getInstructions());
         recipe.setIngredients(recipeDTO.getIngredients());
+
         return recipe;
     }
 }
